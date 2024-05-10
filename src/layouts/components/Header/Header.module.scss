@@ -1,0 +1,14 @@
+.header-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--header-height);
+    background: var(--gradient-color);
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+}
+
+.header-content {
+    height: 100%;
+    width: var(--default-width-whole-page);
+}
