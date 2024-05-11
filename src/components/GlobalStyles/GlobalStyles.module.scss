@@ -8,13 +8,14 @@
     --white-color: #ffffff;
     --black-color: #000000;
     --text-color: hsl(240, 4%, 36%);
-    --white-color-deam: hsl(0, 0%, 93%);
+    --input-color: #828282;
+    --white-color-deam: rgb(237, 237, 237);
+    --red-color: rgb(222, 35, 35);
     --grey-text: rgb(190, 190, 190);
     --input-color: rgb(239, 239, 239);
     --body-color: rgb(240, 240, 246);
     --card-bg: rgb(225, 225, 235);
 
-    --header-height: 120px;
     --default-width-whole-page: 1150px;
     --sidebar-width: 356px;
 }
@@ -33,4 +34,6 @@ html {
 body {
     font-size: 1.6rem;
     background-color: var(--body-color);
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
 }
