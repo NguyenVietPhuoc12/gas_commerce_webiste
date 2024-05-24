@@ -1,51 +1,29 @@
 /* Import libraries from React Js */
-import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /* Import Tippy Library */
 import Tippy from '@tippyjs/react';
-import TippyHeadless from '@tippyjs/react/headless';
 import 'tippy.js/dist/tippy.css';
 
 /* Import React Icons */
-import { CloseIcon, PhoneIcon, SearchIcon, MenuIcon } from '~/components/Icons';
-import { FiPhoneCall } from 'react-icons/fi';
-import { LuSend } from 'react-icons/lu';
-import { LuMailbox } from 'react-icons/lu';
+import { PhoneIcon, MenuIcon, HasUserPhoneIcon, SendIcon, CartIcon } from '~/components/Icons';
 
 /* Import CSS Private Component */
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 
 /* Import components */
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import SearchProductItem from '~/components/SearchProductItem';
 import Buttons from '~/components/Buttons';
 import Menu from '~/components/Popper/Menu';
+import Search from '../Search';
 
 /* Import constants */
 import { MENU_ITEMS, USER_MENU } from '~/constants';
 
-/* Import API from DB */
-import { products } from '~/db/ProductItemDB';
-
 const cx = classNames.bind(styles);
 
 const Header = () => {
-    const [searchResult, setSearchResult] = useState([]);
-    const timerId = useRef();
-
     const hasUser = true;
-
-    useEffect(() => {
-        timerId.current = setTimeout(() => {
-            setSearchResult([1, 2]);
-        }, 1000);
-
-        return () => {
-            clearTimeout(timerId.current);
-        };
-    }, []);
 
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -72,36 +50,7 @@ const Header = () => {
                 {/*-------------X---------- Logo container jsx-----------X--------- */}
 
                 {/*------------------------ Search container jsx--------------------- */}
-                <div>
-                    <TippyHeadless
-                        interactive={true}
-                        visible={searchResult.length > 0}
-                        render={(attrs) => {
-                            return (
-                                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                                    <PopperWrapper>
-                                        <h4 className={cx('search-result-title')}>Tìm kiếm</h4>
-                                        {products.map((product) => {
-                                            return <SearchProductItem data={product} key={product.id} />;
-                                        })}
-                                    </PopperWrapper>
-                                </div>
-                            );
-                        }}
-                    >
-                        <div className={cx('header-search')}>
-                            <input type="text" placeholder="Tìm kiếm sản phẩm..." spellCheck={false} />
-                            <button className={cx('header-search-clear')}>
-                                <CloseIcon className={cx('icon')} />
-                            </button>
-                            <Tippy content="Tìm kiếm" placement="bottom">
-                                <button className={cx('header-search-btn')}>
-                                    <SearchIcon className={cx('icon')} />
-                                </button>
-                            </Tippy>
-                        </div>
-                    </TippyHeadless>
-                </div>
+                <Search />
                 {/*-------------X---------- Search container jsx------------X-------- */}
 
                 {/*------------------------ Actions container jsx--------------------- */}
@@ -110,17 +59,17 @@ const Header = () => {
                         <>
                             <Tippy delay={[0, 300]} content="Hotline: 0702407702" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FiPhoneCall className={cx('icon')} />
+                                    <HasUserPhoneIcon className={cx('icon')} />
                                 </button>
                             </Tippy>
                             <Tippy delay={[0, 300]} content="Nhắn tin" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <LuSend className={cx('icon')} />
+                                    <SendIcon className={cx('icon')} />
                                 </button>
                             </Tippy>
-                            <Tippy delay={[0, 300]} content="Hòm thư" placement="bottom">
+                            <Tippy delay={[0, 300]} content="Giỏ hàng" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <LuMailbox className={cx('icon')} />
+                                    <CartIcon className={cx('icon')} />
                                 </button>
                             </Tippy>
                         </>
