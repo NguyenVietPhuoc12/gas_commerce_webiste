@@ -152,6 +152,52 @@
         display: flex;
         align-items: center;
 
+        /* Header action CSS when has user login */
+        .action-btn {
+            color: var(--white-color);
+            font-size: 2.4rem;
+            padding: 4px 12px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .action-btn:nth-child(3) {
+            position: relative;
+        }
+
+        .action-btn:nth-child(3)::before {
+            content: '0';
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            right: 4px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: var(--red-color);
+        }
+
+        .image-box {
+            width: 42px;
+            height: 42px;
+            margin-left: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        /* Header action CSS while no anyone login */
         .header-actions-hotline {
             display: flex;
             align-items: center;

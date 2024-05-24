@@ -9,7 +9,9 @@ import 'tippy.js/dist/tippy.css';
 
 /* Import React Icons */
 import { CloseIcon, PhoneIcon, SearchIcon, MenuIcon } from '~/components/Icons';
-import { CiLogin } from 'react-icons/ci';
+import { FiPhoneCall } from 'react-icons/fi';
+import { LuSend } from 'react-icons/lu';
+import { LuMailbox } from 'react-icons/lu';
 
 /* Import CSS Private Component */
 import classNames from 'classnames/bind';
@@ -22,7 +24,7 @@ import Buttons from '~/components/Buttons';
 import Menu from '~/components/Popper/Menu';
 
 /* Import constants */
-import { MENU_ITEMS } from '~/constants';
+import { MENU_ITEMS, USER_MENU } from '~/constants';
 
 /* Import API from DB */
 import { products } from '~/db/ProductItemDB';
@@ -33,6 +35,8 @@ const Header = () => {
     const [searchResult, setSearchResult] = useState([]);
     const timerId = useRef();
 
+    const hasUser = true;
+
     useEffect(() => {
         timerId.current = setTimeout(() => {
             setSearchResult([1, 2]);
@@ -42,6 +46,15 @@ const Header = () => {
             clearTimeout(timerId.current);
         };
     }, []);
+
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                break;
+
+            default:
+        }
+    };
 
     return (
         <header className={cx('header-wrapper')}>
@@ -93,21 +106,52 @@ const Header = () => {
 
                 {/*------------------------ Actions container jsx--------------------- */}
                 <div className={cx('header-actions')}>
-                    <div className={cx('header-actions-hotline')}>
-                        <PhoneIcon className={cx('icon')} />
-                        <a href="tel: 0702407702">
-                            <span>Hotline:</span> 0702407702
-                        </a>
-                    </div>
+                    {hasUser ? (
+                        <>
+                            <Tippy delay={[0, 300]} content="Hotline: 0702407702" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FiPhoneCall className={cx('icon')} />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 300]} content="Nhắn tin" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <LuSend className={cx('icon')} />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 300]} content="Hòm thư" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <LuMailbox className={cx('icon')} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <div className={cx('header-actions-hotline')}>
+                                <PhoneIcon className={cx('icon')} />
+                                <a href="tel: 0702407702">
+                                    <span>Hotline:</span> 0702407702
+                                </a>
+                            </div>
 
-                    <Buttons outline to="/login">
-                        Đăng nhập
-                    </Buttons>
-
-                    <Menu items={MENU_ITEMS}>
-                        <div className={cx('header-actions-menu')}>
-                            <MenuIcon className={cx('icon')} />
-                        </div>
+                            <Buttons outline rounded to="/login">
+                                Đăng nhập
+                            </Buttons>
+                        </>
+                    )}
+                    <Menu items={hasUser ? USER_MENU : MENU_ITEMS} onChange={handleMenuChange}>
+                        {hasUser ? (
+                            <div className={cx('image-box')}>
+                                <img
+                                    src={require('~/assets/images/avatar.png')}
+                                    className={cx('user-avatar')}
+                                    alt="user"
+                                />
+                            </div>
+                        ) : (
+                            <div className={cx('header-actions-menu')}>
+                                <MenuIcon className={cx('icon')} />
+                            </div>
+                        )}
                     </Menu>
                 </div>
                 {/*-------------X---------- Actions container jsx------------X-------- */}
