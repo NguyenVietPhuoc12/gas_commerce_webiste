@@ -7,6 +7,7 @@
         width: var(--default-width-whole-page);
         min-height: 1000px;
         display: flex;
+        margin-top: var(--header-height);
 
         .content {
             flex: 1;

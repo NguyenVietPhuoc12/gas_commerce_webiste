@@ -34,22 +34,25 @@ const Menu = ({ items = [], children, onChange = () => {} }) => {
                 interactive
                 placement="bottom-end"
                 onHide={() => setHistory((prev) => prev.slice(0, 1))}
+                hideOnClick="false"
                 render={(attrs) => {
                     return (
                         <div className={cx('menu-list')} {...attrs} tabIndex="-1">
                             <PopperWrapper>
                                 {history.length > 1 && <Header title={'Ngôn ngữ'} onBack={handleBackMenu} />}
-                                {currentMenu.data.map((item, index) => {
-                                    const isParent = !!item.subMenu;
+                                <div className={cx('menu-body')}>
+                                    {currentMenu.data.map((item, index) => {
+                                        const isParent = !!item.subMenu;
 
-                                    return (
-                                        <MenuItem
-                                            key={index}
-                                            data={item}
-                                            onClick={() => handleRenderSubMenu(item, isParent)}
-                                        />
-                                    );
-                                })}
+                                        return (
+                                            <MenuItem
+                                                key={index}
+                                                data={item}
+                                                onClick={() => handleRenderSubMenu(item, isParent)}
+                                            />
+                                        );
+                                    })}
+                                </div>
                             </PopperWrapper>
                         </div>
                     );

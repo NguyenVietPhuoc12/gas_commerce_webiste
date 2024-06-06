@@ -23,6 +23,7 @@
 .header {
     position: relative;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     height: 50px;
     top: -8px;
@@ -49,4 +50,8 @@
         font-weight: 600;
         color: var(--black-color);
     }
+}
+
+.menu-body {
+    overflow-y: overlay;
 }

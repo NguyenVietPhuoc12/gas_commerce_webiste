@@ -1,5 +1,4 @@
 :root {
-    --header-height: 80px;
     --border-radius-value: 92px;
     --search-height-btn: 46px;
     --search-y-gap: 9px;
@@ -7,6 +6,9 @@
 }
 
 .header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     align-items: center;

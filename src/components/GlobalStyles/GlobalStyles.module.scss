@@ -19,6 +19,8 @@
     --default-width-whole-page: 1150px;
     --sidebar-width: 356px;
     --default-layout-horizontal-spacer: 24px;
+
+    --header-height: 80px;
 }
 
 * {
@@ -37,6 +39,22 @@ body {
     background-color: var(--body-color);
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+    overflow-y: auto;
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .icon {

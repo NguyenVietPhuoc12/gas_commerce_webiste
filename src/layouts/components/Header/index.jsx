@@ -1,5 +1,6 @@
 /* Import libraries from React Js */
 import { Link } from 'react-router-dom';
+import routesConfig from '~/config/routes';
 
 /* Import Tippy Library */
 import Tippy from '@tippyjs/react';
@@ -38,7 +39,7 @@ const Header = () => {
         <header className={cx('header-wrapper')}>
             <div className={cx('header-content')}>
                 {/*------------------------ Logo container jsx--------------------- */}
-                <Link to={'/'}>
+                <Link to={routesConfig.home}>
                     <div className={cx('header__content-logo')}>
                         <img src={require('~/assets/images/logo.png')} alt="logo" />
                         <div className={cx('header__content-title')}>
@@ -82,7 +83,7 @@ const Header = () => {
                                 </a>
                             </div>
 
-                            <Buttons outline rounded to="/login">
+                            <Buttons outline rounded to={routesConfig.login}>
                                 Đăng nhập
                             </Buttons>
                         </>

@@ -14,7 +14,7 @@ import SearchProductItem from '~/components/SearchProductItem';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 
-/* Import API from DB */
+/* Import fake API from DB */
 import { products } from '~/db/ProductItemDB';
 
 /* Import icons from Icon component */
@@ -33,15 +33,33 @@ const Search = () => {
     const inputRef = useRef();
 
     /* Call API to search with fetch method and using useEffect */
+    /*
+    useEffect(() => {
+        fetch('URL_HERE')
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+            });
+    }, [searchValue]);
+    */
+
     useEffect(() => {
         timerId.current = setTimeout(() => {
             setSearchResult([1, 2]);
         }, 1000);
 
         return () => {
-            clearTimeout(timerId.current);
+            clearTimeout(timerId);
         };
-    }, []);
+    }, [searchValue]);
+
+    /* Defined a function to handle search input value */
+    const handleInputSearchValue = (e) => {
+        const searchInputValue = e.target.value;
+        if (!searchInputValue.startsWith(' ')) {
+            setSearchValue(searchInputValue);
+        }
+    };
 
     /* Defined a function to handle clear search's value */
     const handleClearSearchValue = () => {
@@ -86,7 +104,7 @@ const Search = () => {
                         type="text"
                         placeholder="Tìm kiếm sản phẩm..."
                         spellCheck={false}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={handleInputSearchValue}
                         onFocus={handleShowSearchResult}
                     />
                     {!!searchValue && (
@@ -95,7 +113,7 @@ const Search = () => {
                         </button>
                     )}
                     <Tippy content="Tìm kiếm" placement="bottom">
-                        <button className={cx('header-search-btn')}>
+                        <button className={cx('header-search-btn')} onMouseDown={(e) => e.preventDefault()}>
                             <SearchIcon className={cx('icon')} />
                         </button>
                     </Tippy>
